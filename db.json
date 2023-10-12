@@ -1,13 +1,6 @@
 {
   "movies": [
     {
-      "id": 1,
-      "title": "The Dark Knight",
-      "rating": 14,
-      "year": 2008,
-      "description": "When the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
-    },
-    {
       "id": 2,
       "title": "Inception",
       "rating": 14,

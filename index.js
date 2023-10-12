@@ -1,44 +1,86 @@
-document.getElementById('searchButton').addEventListener('click', searchMovies);
-async function searchMovies() {
-    const apiKey = 'dc1a2e41';
-    const movieName = document.getElementById('searchInput').value.trim();
-    const apiUrl = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(movieName)}`;
+const moviesContainer = document.getElementById('movies');
+const titleInput = document.getElementById('titleInput');
+const yearInput = document.getElementById('yearInput');
+const descriptionInput = document.getElementById('descriptionInput');
+const addButton = document.getElementById('addButton');
 
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.Response === 'True') {
-            const movies = data.Search;
-            let output = '';
-            for (const movie of movies) {
-                const movieDetails = await getMovieDetails(movie.imdbID, apiKey);
-                output += generateMovieCard(movieDetails);
+function fetchMovies() {
+    fetch('http://localhost:3000/movies')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-            document.getElementById('results').innerHTML = output;
-        } else {
-            document.getElementById('results').innerHTML = 'No movies found.';
-        }
-    } catch (error) {
-        console.error('Error fetching data:', error);
+            return response.json();
+        })
+        .then(movies => {
+            moviesContainer.innerHTML = '';
+            movies.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.classList.add('movie-card');
+                movieDiv.innerHTML = `
+                    <h2>${movie.title}</h2>
+                    <p>Year: ${movie.year}</p>
+                    <p>Description: ${movie.description}</p>
+                    <button onclick="editMovie(${movie.id})">Edit</button>
+                    <button onclick="deleteMovie(${movie.id})">Delete</button>
+                `;
+                moviesContainer.appendChild(movieDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching movies:', error);
+        });
+}
+
+function addMovie() {
+    const title = titleInput.value;
+    const year = parseInt(yearInput.value);
+    const description = descriptionInput.value;
+
+    if (!title || isNaN(year) || !description) {
+        console.error('Invalid input. Please fill in all fields correctly.');
+        return;
     }
+
+    fetch('http://localhost:3000/movies', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, year, description }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        fetchMovies();
+        titleInput.value = '';
+        yearInput.value = '';
+        descriptionInput.value = '';
+    })
+    .catch(error => {
+        console.error('Error adding movie:', error);
+    });
 }
-async function getMovieDetails(movieId, apiKey) {
-    const apiUrl = `http://www.omdbapi.com/?apikey=${apiKey}&i=${movieId}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    return data;
+
+function editMovie(id) {
 }
-function generateMovieCard(movieDetails) {
-    return `
-        <div class="movie-card">
-            <h2>${movieDetails.Title}</h2>
-            <img src="${movieDetails.Poster}" alt="${movieDetails.Title}">
-            <p>Year: ${movieDetails.Year}</p>
-            <p>Released: ${movieDetails.Released}</p>
-            <p>Actors: ${movieDetails.Actors}</p>
-            <p>Ratings: ${movieDetails.Ratings.map(rating => `${rating.Source}: ${rating.Value}`).join(', ')}</p>
-            <p>Description: ${movieDetails.Plot}</p>
-        </div>
-    `;
+
+function deleteMovie(id) {
+    fetch(`http://localhost:3000/movies/${id}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        fetchMovies();
+    })
+    .catch(error => {
+        console.error('Error deleting movie:', error);
+    });
 }
+
+addButton.addEventListener('click', addMovie);
+
+fetchMovies();
