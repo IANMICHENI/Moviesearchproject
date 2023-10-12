@@ -32,7 +32,7 @@ function fetchMovies() {
         });
 }
 
-
+function addMovie() {
     const title = titleInput.value;
     const year = parseInt(yearInput.value);
     const description = descriptionInput.value;
