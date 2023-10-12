@@ -83,4 +83,3 @@ function deleteMovie(id) {
 
 addButton.addEventListener('click', addMovie);
 
-fetchMovies();
