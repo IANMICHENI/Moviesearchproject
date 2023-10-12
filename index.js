@@ -63,8 +63,6 @@ function addMovie() {
     });
 }
 
-function editMovie(id) {
-}
 
 function deleteMovie(id) {
     fetch(`http://localhost:3000/movies/${id}`, {
