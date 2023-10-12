@@ -32,11 +32,6 @@ function fetchMovies() {
         });
 }
 
-function addMovie() {
-    const title = titleInput.value;
-    const year = parseInt(yearInput.value);
-    const description = descriptionInput.value;
-
     if (!title || isNaN(year) || !description) {
         console.error('Invalid input. Please fill in all fields correctly.');
         return;
