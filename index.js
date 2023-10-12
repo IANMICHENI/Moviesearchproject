@@ -64,6 +64,54 @@ function addMovie() {
 }
 
 function editMovie(id) {
+    fetch(`http://localhost:3000/movies/${id}`)
+        .then(response => response.json())
+        .then(movie => {
+            titleInput.value = movie.title;
+            yearInput.value = movie.year;
+            descriptionInput.value = movie.description;
+
+            addButton.innerText = 'Save Changes';
+            addButton.removeEventListener('click', addMovie);
+            addButton.addEventListener('click', () => saveChanges(id));
+        })
+        .catch(error => {
+            console.error('Error fetching movie details:', error);
+        });
+}
+
+function saveChanges(id) {
+    const editedTitle = titleInput.value;
+    const editedYear = parseInt(yearInput.value);
+    const editedDescription = descriptionInput.value;
+
+    if (!editedTitle || isNaN(editedYear) || !editedDescription) {
+        console.error('Invalid input. Please fill in all fields correctly.');
+        return;
+    }
+
+    fetch(`http://localhost:3000/movies/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: editedTitle, year: editedYear, description: editedDescription }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        titleInput.value = '';
+        yearInput.value = '';
+        descriptionInput.value = '';
+        addButton.innerText = 'Add Movie';
+        addButton.removeEventListener('click', saveChanges);
+        addButton.addEventListener('click', addMovie);
+        fetchMovies();
+    })
+    .catch(error => {
+        console.error('Error updating movie:', error);
+    });
 }
 
 function deleteMovie(id) {
