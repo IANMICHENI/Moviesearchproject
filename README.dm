@@ -4,7 +4,7 @@
 ##** Ian Mwenda M **
 
 ## Project Description
-This project is a simple Movie Database application that allows users to add, edit, and delete movies. 
+This project is a simple Movie Database application that allows users to add, edit, and delete movies descriptions. 
 The application fetches movie data from a local server and displays it in the web interface.
 Users can add new movies by providing the title, year, and description, and they can also edit or delete existing movies.
  

@@ -3,6 +3,9 @@ const titleInput = document.getElementById('titleInput');
 const yearInput = document.getElementById('yearInput');
 const descriptionInput = document.getElementById('descriptionInput');
 const addButton = document.getElementById('addButton');
+const homeButton = document.getElementById('homeButton');
+const aboutButton = document.getElementById('aboutButton');
+const contactsButton = document.getElementById('contactsButton');
 
 function fetchMovies() {
     fetch('http://localhost:3000/movies')
@@ -127,6 +130,7 @@ function deleteMovie(id) {
     .catch(error => {
         console.error('Error deleting movie:', error);
     });
+
 }
 
 addButton.addEventListener('click', addMovie);
