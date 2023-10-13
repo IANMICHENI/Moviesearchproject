@@ -1,0 +1,46 @@
+{
+  "movies": [
+    {
+      "id": 8,
+      "title": "La La Land",
+      "rating": 14,
+      "year": 2016,
+      "description": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future."
+    },
+    {
+      "id": 9,
+      "title": "Get Out",
+      "rating": 14,
+      "year": 2017,
+      "description": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point."
+    },
+    {
+      "id": 10,
+      "title": "Parasite",
+      "rating": 14,
+      "year": 2019,
+      "description": "A poor family, the Kims, con their way into becoming the servants of a rich family, the Parks. But their easy life gets complicated when their deception is threatened with exposure."
+    },
+    {
+      "id": 11,
+      "title": "Joker",
+      "rating": 14,
+      "year": 2019,
+      "description": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated, leading him to embark on a downward spiral of revolution and bloody crime."
+    },
+    {
+      "id": 12,
+      "title": "Dune",
+      "rating": 14,
+      "year": 2021,
+      "description": "Feature adaptation of Frank Herbert's science fiction novel, about the son of a noble family entrusted with the protection of the most valuable asset and most vital element in the galaxy."
+    },
+    {
+      "id": 13,
+      "title": "The French Dispatch",
+      "rating": 14,
+      "year": 2021,
+      "description": "A love letter to journalists set in an outpost of an American newspaper in a fictional 20th-century French city that brings to life a collection of stories published in 'The French Dispatch Magazine'."
+    }
+  ]
+}
