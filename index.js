@@ -8,7 +8,7 @@ const aboutButton = document.getElementById('aboutButton');
 const contactsButton = document.getElementById('contactsButton');
 
 function fetchMovies() {
-    fetch('https://project-deploy-zoa6.onrender.com/blog')
+    fetch('http://localhost:3000/movies')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -45,7 +45,7 @@ function addMovie() {
         return;
     }
 
-    fetch('https://project-deploy-zoa6.onrender.com/blog', {
+    fetch('http://localhost:3000/movies', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ function addMovie() {
 }
 
 function editMovie(id) {
-    fetch(`https://project-deploy-zoa6.onrender.com/blog${id}`)
+    fetch(`http://localhost:3000/movies/${id}`)
         .then(response => response.json())
         .then(movie => {
             titleInput.value = movie.title;
@@ -93,7 +93,7 @@ function saveChanges(id) {
         return;
     }
 
-    fetch(`https://project-deploy-zoa6.onrender.com/blog${id}`, {
+    fetch(`http://localhost:3000/movies/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ function saveChanges(id) {
 }
 
 function deleteMovie(id) {
-    fetch(`https://project-deploy-zoa6.onrender.com/blog${id}`, {
+    fetch(`http://localhost:3000/movies/${id}`, {
         method: 'DELETE',
     })
     .then(response => {
