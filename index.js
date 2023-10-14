@@ -8,7 +8,7 @@ const aboutButton = document.getElementById('aboutButton');
 const contactsButton = document.getElementById('contactsButton');
 
 function fetchMovies() {
-    fetch('http://localhost:3000/movies')
+    fetch('https://movie-datasearch-blog.onrender.com/movies')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -45,7 +45,7 @@ function addMovie() {
         return;
     }
 
-    fetch('http://localhost:3000/movies', {
+    fetch('https://movie-datasearch-blog.onrender.com/movies', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ function addMovie() {
 }
 
 function editMovie(id) {
-    fetch(`http://localhost:3000/movies/${id}`)
+    fetch(`https://movie-datasearch-blog.onrender.com/movies/${id}`)
         .then(response => response.json())
         .then(movie => {
             titleInput.value = movie.title;
@@ -93,7 +93,7 @@ function saveChanges(id) {
         return;
     }
 
-    fetch(`http://localhost:3000/movies/${id}`, {
+    fetch(`https://movie-datasearch-blog.onrender.com/movies/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ function saveChanges(id) {
 }
 
 function deleteMovie(id) {
-    fetch(`http://localhost:3000/movies/${id}`, {
+    fetch(`https://movie-datasearch-blog.onrender.com/movies/${id}`, {
         method: 'DELETE',
     })
     .then(response => {
